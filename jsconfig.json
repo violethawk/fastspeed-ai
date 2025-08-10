@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    // Base directory for absolute imports. This allows us to
+    // reference modules like `@/components/*` instead of long
+    // relative paths.
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"],
+      "@/data/*": ["data/*"]
+    }
+  }
+}
