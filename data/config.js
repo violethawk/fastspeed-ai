@@ -31,7 +31,9 @@ module.exports = {
   // multiple places.  The top promo message is shown in the
   // dismissible banner at the top of the page.
   copy: {
-    ctaVariants: ['Try Now →', 'Get Started →'],
-    topPromoMsg: 'Editor’s Pick: Jasper — fastest writer in our tests',
+    heroTitle: "Find the Fastest AI Tools — Ranked & Reviewed",
+    heroSub: "Updated Monthly. Expert-ranked picks: faster tools, better results.",
+    ctaVariants: ["Try Now →", "Get Started →"],
+    topPromoMsg: "Editor’s Pick: Jasper — fastest writer in our tests"
   },
 };
