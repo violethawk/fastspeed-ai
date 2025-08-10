@@ -1,36 +1,39 @@
+// components/ComparisonTable.jsx
 import React from 'react';
 
 /**
- * Simple comparison table for the top three tools.  Displays basic
- * pricing and commission information alongside a highlight of the first
- * bullet point.  Where data is missing the cell shows an em dash.
- *
- * @param {Object} props
- * @param {Array} props.tools Array of three tool objects
+ * Public-safe comparison table for the top three tools.
+ * Columns: Speed, Free Trial, From $, Key Feature (no owner metrics).
  */
 const ComparisonTable = ({ tools }) => {
+  const rows = (tools || []).slice(0, 3).map((t) => ({
+    name: t.name,
+    speed: t.bullets?.[0] || '—',
+    trial: t.trial ?? '—',
+    priceFrom: typeof t.priceFrom === 'number' ? `$${t.priceFrom}/mo` : (t.priceFrom || '—'),
+    keyFeature: t.bullets?.[1] || t.summary || '—',
+  }));
+
   return (
-    <div className="overflow-x-auto border rounded-lg mb-4">
+    <div className="overflow-x-auto border rounded-xl">
       <table className="min-w-full text-sm">
-        <thead className="bg-gray-100">
+        <thead className="bg-gray-50">
           <tr>
-            <th className="px-3 py-2 text-left font-semibold">Tool</th>
-            <th className="px-3 py-2 text-left font-semibold">Speed</th>
-            <th className="px-3 py-2 text-left font-semibold">Trial</th>
-            <th className="px-3 py-2 text-left font-semibold">From $</th>
-            <th className="px-3 py-2 text-left font-semibold">Commission</th>
-            <th className="px-3 py-2 text-left font-semibold">Key Feature</th>
+            <th className="text-left px-4 py-3 font-semibold">Tool</th>
+            <th className="text-left px-4 py-3">Speed</th>
+            <th className="text-left px-4 py-3">Free Trial</th>
+            <th className="text-left px-4 py-3">From $</th>
+            <th className="text-left px-4 py-3">Key Feature</th>
           </tr>
         </thead>
         <tbody>
-          {tools.map((tool) => (
-            <tr key={tool.slug} className="border-t">
-              <td className="px-3 py-2 font-medium whitespace-nowrap">{tool.name}</td>
-              <td className="px-3 py-2 whitespace-nowrap">{tool.summary.split(' ')[0] || '—'}</td>
-              <td className="px-3 py-2 whitespace-nowrap">{tool.metrics.trial || '—'}</td>
-              <td className="px-3 py-2 whitespace-nowrap">{tool.metrics.fromPrice ? `$${tool.metrics.fromPrice}` : '—'}</td>
-              <td className="px-3 py-2 whitespace-nowrap">{tool.metrics.payout ? `${Math.round(tool.metrics.payout * 100)}%` : '—'}</td>
-              <td className="px-3 py-2 whitespace-nowrap">{tool.bullets[0] || '—'}</td>
+          {rows.map((r) => (
+            <tr key={r.name} className="border-t">
+              <td className="px-4 py-3 font-medium">{r.name}</td>
+              <td className="px-4 py-3">{r.speed}</td>
+              <td className="px-4 py-3">{r.trial}</td>
+              <td className="px-4 py-3">{r.priceFrom}</td>
+              <td className="px-4 py-3">{r.keyFeature}</td>
             </tr>
           ))}
         </tbody>
