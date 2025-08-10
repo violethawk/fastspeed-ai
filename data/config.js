@@ -7,33 +7,40 @@
  * marketing copy that appears in the UI so you can change it without
  * touching the React components.
  */
+// data/config.js
+// Centralised config for weights, feature flags, and public-facing copy.
+
 module.exports = {
-  // Weights for the profit score.  All weights except
-  // `time_penalty` should sum to 1 for predictable scaling.
+  // Weights for the profit ranking algorithm (private use only)
   weights: {
     epc: 0.45,
     cvr: 0.2,
     recur: 0.2,
     payout: 0.1,
     rating: 0.05,
-    time_penalty: 0.5,
+    time_penalty: 0.5
   },
-  // Flags to toggle certain pieces of UI and analytics.
+
+  // Feature flags for optional UI elements and analytics
   flags: {
     stickyCTA: true,
     topBarPromo: true,
     analytics: {
-      enabled: false,
-      plausibleDomain: 'fastspeed.ai',
-    },
+      enabled: false, // set to true to enable Plausible snippet in _document.jsx
+      plausibleDomain: "fastspeed.ai"
+    }
   },
-  // Centralised copy.  CTA variants rotate automatically when used in
-  // multiple places.  The top promo message is shown in the
-  // dismissible banner at the top of the page.
+
+  // All copy that appears in the UI
   copy: {
+    // Hero section
     heroTitle: "Find the Fastest AI Tools — Ranked & Reviewed",
     heroSub: "Updated Monthly. Expert-ranked picks: faster tools, better results.",
+
+    // CTA button text variants (randomised per render)
     ctaVariants: ["Try Now →", "Get Started →"],
+
+    // Top bar promo message (can reference a current high-performer)
     topPromoMsg: "Editor’s Pick: Jasper — fastest writer in our tests"
-  },
+  }
 };
